@@ -1,0 +1,45 @@
+{
+  "_meta": "DRAFT translation by Claude — verify before launch",
+  "nav": {
+    "insights": "Insights",
+    "perspectives": "Perspectives",
+    "plans": "Plans",
+    "about": "About",
+    "chat": "Chat"
+  },
+  "hero": {
+    "eyebrow": "A Slower Pulse",
+    "headline_line1": "Num mundo acelerado,",
+    "headline_line2": "um olhar mais lento.",
+    "byline": "Carol · produto de IA · curadora",
+    "cta_read": "Ler a edição mais recente",
+    "cta_chat": "Falar com o meu gémeo digital"
+  },
+  "sections": {
+    "insights": "Insights",
+    "insights_kicker": "Notas de campo",
+    "perspectives": "Perspectives",
+    "perspectives_kicker": "Vozes que guardo",
+    "plans": "Plans",
+    "plans_kicker": "Em curso",
+    "about": "About",
+    "about_kicker": "Sobre esta publicação"
+  },
+  "ask": {
+    "floating": "Ask Carol →",
+    "title": "Ask Carol",
+    "subtitle": "Pergunte nas suas palavras. Respondo na voz de Carol.",
+    "try": "Tente perguntar",
+    "placeholder": "Escreva a sua pergunta…",
+    "send": "Enviar",
+    "quota": "Restam {n} perguntas gratuitas este mês",
+    "poweredBy": "Powered by Claude"
+  },
+  "footer": {
+    "edition": "Edition 01",
+    "builtWith": "Built with Claude Code"
+  },
+  "welcome": {
+    "greeting": "Bem-vindo — você é o leitor número {serial}"
+  }
+}

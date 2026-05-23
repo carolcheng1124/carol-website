@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "insights": "Insights",
+    "perspectives": "Perspectives",
+    "plans": "Plans",
+    "about": "About",
+    "chat": "Chat"
+  },
+  "hero": {
+    "eyebrow": "A Slower Pulse",
+    "headline_line1": "In an accelerating world",
+    "headline_line2": "— a slower pulse.",
+    "byline": "Carol · AI product · curator",
+    "cta_read": "Read the latest edition",
+    "cta_chat": "Talk to my digital twin"
+  },
+  "sections": {
+    "insights": "Insights",
+    "insights_kicker": "Field notes",
+    "perspectives": "Perspectives",
+    "perspectives_kicker": "Voices I keep",
+    "plans": "Plans",
+    "plans_kicker": "In motion",
+    "about": "About",
+    "about_kicker": "About this quarterly"
+  },
+  "ask": {
+    "floating": "Ask Carol →",
+    "title": "Ask Carol",
+    "subtitle": "Carol's digital twin — built from her notes and views",
+    "try": "Try asking",
+    "topics": [
+      "What AI product directions are you thinking about lately?",
+      "What's a recent piece you'd recommend reading twice?",
+      "What has Claude Code changed for a product person?",
+      "What do you make of the \"Software 3.0\" framing?"
+    ],
+    "hint": "— or just ask me something else below —",
+    "placeholder": "Ask something…",
+    "send": "Send",
+    "quota": "{used} / {total} free questions left this month",
+    "poweredBy": "Powered by Claude",
+    "errorGeneric": "Something went wrong — try again in a moment."
+  },
+  "footer": {
+    "edition": "Edition 01",
+    "builtWith": "Built with Claude Code"
+  },
+  "welcome": {
+    "greeting": "Welcome — you're reader #{serial}"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_meta": "DRAFT translation by Claude — verify before launch",
+  "nav": {
+    "insights": "Insights",
+    "perspectives": "Perspectives",
+    "plans": "Plans",
+    "about": "About",
+    "chat": "Chat"
+  },
+  "hero": {
+    "eyebrow": "A Slower Pulse",
+    "headline_line1": "加速する世界のなかで、",
+    "headline_line2": "ゆっくりと観る記録を。",
+    "byline": "Carol · AIプロダクト · キュレーター",
+    "cta_read": "最新号を読む",
+    "cta_chat": "デジタルツインと話す"
+  },
+  "sections": {
+    "insights": "Insights",
+    "insights_kicker": "観察ノート",
+    "perspectives": "Perspectives",
+    "perspectives_kicker": "他者の声",
+    "plans": "Plans",
+    "plans_kicker": "進行中",
+    "about": "About",
+    "about_kicker": "この刊行物について"
+  },
+  "ask": {
+    "floating": "Ask Carol →",
+    "title": "Ask Carol",
+    "subtitle": "あなたの言葉で。Carolの声で答えます。",
+    "try": "聞いてみる",
+    "placeholder": "質問を入力…",
+    "send": "送信",
+    "quota": "今月の無料質問: 残り {n} 回",
+    "poweredBy": "Powered by Claude"
+  },
+  "footer": {
+    "edition": "Edition 01",
+    "builtWith": "Built with Claude Code"
+  },
+  "welcome": {
+    "greeting": "ようこそ — あなたは {serial} 番目の読者です"
+  }
+}

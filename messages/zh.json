@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "insights": "Insights",
+    "perspectives": "Perspectives",
+    "plans": "Plans",
+    "about": "About",
+    "chat": "Chat"
+  },
+  "hero": {
+    "eyebrow": "A Slower Pulse",
+    "headline_line1": "在被加速的世界里,",
+    "headline_line2": "做一份慢下来的观察。",
+    "byline": "Carol · AI 产品人 · 内容策展者",
+    "cta_read": "阅读最新一期",
+    "cta_chat": "和我的数字分身聊聊"
+  },
+  "sections": {
+    "insights": "Insights",
+    "insights_kicker": "观察笔记",
+    "perspectives": "Perspectives",
+    "perspectives_kicker": "他者之声",
+    "plans": "Plans",
+    "plans_kicker": "正在进行",
+    "about": "About",
+    "about_kicker": "关于这份刊物"
+  },
+  "ask": {
+    "floating": "跟我聊聊 →",
+    "title": "Ask Carol",
+    "subtitle": "这是 Carol 的数字分身,基于她的笔记与观点",
+    "try": "试试问",
+    "topics": [
+      "你最近在想哪些 AI 产品方向?",
+      "推荐一篇你最近读过、值得复读的文章?",
+      "对一个产品人,Claude Code 改变了什么?",
+      "\"Software 3.0\" 这个说法你怎么看?"
+    ],
+    "hint": "— 或者直接在下面问我别的 —",
+    "placeholder": "问点什么…",
+    "send": "发送",
+    "quota": "本月剩余 {used} / {total} 次自由提问",
+    "poweredBy": "Powered by Claude",
+    "errorGeneric": "出了点问题,稍后再试一次。"
+  },
+  "footer": {
+    "edition": "Edition 01",
+    "builtWith": "Built with Claude Code"
+  },
+  "welcome": {
+    "greeting": "欢迎,你是第 {serial} 位读者"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_meta": "DRAFT translation by Claude — verify before launch",
+  "nav": {
+    "insights": "Insights",
+    "perspectives": "Perspectives",
+    "plans": "Plans",
+    "about": "About",
+    "chat": "Chat"
+  },
+  "hero": {
+    "eyebrow": "A Slower Pulse",
+    "headline_line1": "가속되는 세계 속에서,",
+    "headline_line2": "느리게 관찰하는 기록.",
+    "byline": "Carol · AI 프로덕트 · 큐레이터",
+    "cta_read": "최신호 읽기",
+    "cta_chat": "디지털 트윈과 대화하기"
+  },
+  "sections": {
+    "insights": "Insights",
+    "insights_kicker": "관찰 노트",
+    "perspectives": "Perspectives",
+    "perspectives_kicker": "타인의 목소리",
+    "plans": "Plans",
+    "plans_kicker": "진행 중",
+    "about": "About",
+    "about_kicker": "이 간행물에 대해"
+  },
+  "ask": {
+    "floating": "Ask Carol →",
+    "title": "Ask Carol",
+    "subtitle": "당신의 말로 물어보세요. Carol의 목소리로 답합니다.",
+    "try": "질문해 보기",
+    "placeholder": "질문을 입력하세요…",
+    "send": "보내기",
+    "quota": "이번 달 무료 질문 {n}회 남음",
+    "poweredBy": "Powered by Claude"
+  },
+  "footer": {
+    "edition": "Edition 01",
+    "builtWith": "Built with Claude Code"
+  },
+  "welcome": {
+    "greeting": "환영합니다 — {serial}번째 독자입니다"
+  }
+}

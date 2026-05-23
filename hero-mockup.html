@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carol — 首页视觉稿 方案 B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ====================================================================
+       Carol — Editorial light theme · 方案 B 首页视觉稿
+       配色:#FAF8F3 米白底 / #1A1A1A 深墨 / #6B6B6B 二级 / #C8553D 锡红
+       字体:Fraunces (英文/装饰 italic) + Noto Serif SC (中文标题)
+            + Inter / PingFang SC (正文与小字)
+    ==================================================================== */
+
+    :root {
+      --bg: #FAF8F3;
+      --bg-warm: #F4F0E6;
+      --bg-warmer: #EEE7D5;
+      --ink: #1A1A1A;
+      --ink-2: #4A4845;
+      --ink-3: #8A857C;
+      --rule: #E5DFD0;
+      --rule-2: #D5CFC0;
+      --accent: #C8553D;
+      --accent-soft: rgba(200, 85, 61, 0.08);
+      --easing: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* 纸质纹理 */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(26, 26, 26, 0.018) 1px, transparent 0);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 48px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* 通用字体辅助 */
+    .serif-en { font-family: 'Fraunces', serif; font-style: italic; }
+    .serif-cn { font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif; font-style: normal; }
+    .sans     { font-family: 'Inter', 'PingFang SC', sans-serif; }
+
+    /* ============================ NAV ============================ */
+    nav {
+      padding: 36px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: rgba(250, 248, 243, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .wordmark {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      font-size: 14px;
+      color: var(--ink-2);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: var(--ink);
+      transition: width 0.3s var(--easing);
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ============================ HERO ============================ */
+    .hero {
+      min-height: calc(100vh - 108px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0 80px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--ink-3);
+    }
+
+    .hero-headline {
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: clamp(40px, 5vw, 68px);
+      line-height: 1.25;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+
+    .hero-headline .line-1,
+    .hero-headline .line-2 {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .hero-headline .line-2 {
+      padding-left: 2em;
+      margin-top: 0.12em;
+    }
+
+    .hero-headline .line-2::after {
+      content: '.';
+      color: var(--accent);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      margin-left: 0.05em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-headline .line-1,
+      .hero-headline .line-2 { white-space: normal; }
+      .hero-headline .line-2 { padding-left: 1em; }
+    }
+
+    .hero-byline {
+      margin-top: 56px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+
+    .hero-byline .name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0;
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .hero-byline .sep {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--ink-3);
+      display: inline-block;
+      transform: translateY(-3px);
+    }
+
+    .hero-ctas {
+      margin-top: 64px;
+      display: flex;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    .text-link {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .text-link .arrow {
+      font-style: normal;
+      font-family: 'Inter', sans-serif;
+      transition: transform 0.35s var(--easing);
+      display: inline-block;
+    }
+
+    .text-link::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 1px;
+      background: var(--ink);
+      transform: scaleX(0.18);
+      transform-origin: left;
+      transition: transform 0.4s var(--easing);
+    }
+
+    .text-link:hover::after { transform: scaleX(1); }
+    .text-link:hover .arrow { transform: translateX(6px); }
+
+    .edition-marker {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      writing-mode: vertical-rl;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.15em;
+    }
+    @media (max-width: 1100px) {
+      .edition-marker { display: none; }
+    }
+
+    /* ==================== SECTION 公共样式 ==================== */
+    section.page-section {
+      padding: 140px 0;
+      position: relative;
+      scroll-margin-top: 80px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 28px;
+      margin-bottom: 72px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule-2);
+    }
+
+    .section-num {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(36px, 4vw, 52px);
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .section-kicker {
+      margin-left: auto;
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 700px) {
+      .section-kicker { display: none; }
+      .section-head { flex-direction: column; gap: 12px; align-items: flex-start; }
+    }
+
+    /* ==================== INSIGHTS ==================== */
+    .insights-list {
+      border-top: 1px solid var(--rule);
+    }
+
+    .insight-row {
+      display: grid;
+      grid-template-columns: 130px 110px 1fr 32px;
+      gap: 32px;
+      padding: 28px 16px 28px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: padding 0.5s var(--easing), background 0.5s ease;
+    }
+
+    .insight-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--ink);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.5s var(--easing);
+    }
+
+    .insight-row:hover {
+      padding-left: 24px;
+      background: var(--bg-warm);
+    }
+    .insight-row:hover::before { transform: scaleY(1); }
+
+    .insight-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+    }
+
+    .insight-tag {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .insight-title {
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-weight: 500;
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--ink);
+      transition: color 0.3s ease;
+    }
+
+    .insight-row:hover .insight-title { color: var(--ink); }
+
+    .insight-arrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      color: var(--ink-3);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: all 0.5s var(--easing);
+      justify-self: end;
+    }
+
+    .insight-row:hover .insight-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--ink);
+    }
+
+    @media (max-width: 700px) {
+      .insight-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 24px 0;
+      }
+      .insight-arrow { display: none; }
+    }
+
+    /* ==================== PERSPECTIVES ==================== */
+    .perspectives-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .perspective-card {
+      padding: 56px 48px 48px;
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.5s var(--easing),
+        border-color 0.5s ease,
+        background 0.5s ease,
+        box-shadow 0.5s var(--easing);
+    }
+
+    .perspective-card::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 0; height: 2px;
+      background: var(--ink);
+      transition: width 0.6s var(--easing);
+    }
+
+    .perspective-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--ink);
+      background: var(--bg-warm);
+      box-shadow:
+        0 1px 0 rgba(26,26,26,0.04),
+        0 20px 40px -20px rgba(26,26,26,0.12);
+    }
+
+    .perspective-card:hover::before { width: calc(100% + 2px); }
+
+    .perspective-mark {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 64px;
+      line-height: 0.8;
+      color: var(--accent);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .perspective-quote {
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+
+    .perspective-source {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 28px;
+    }
+
+    .perspective-source .author-name {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0;
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .perspective-source .dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--ink-3);
+    }
+
+    .perspective-take {
+      padding-top: 28px;
+      border-top: 1px solid var(--rule);
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+
+    .perspective-take .label {
+      display: inline-block;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--accent);
+      margin-right: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .perspectives-grid { grid-template-columns: 1fr; gap: 24px; }
+      .perspective-card { padding: 40px 32px; }
+    }
+
+    /* ==================== PLANS ==================== */
+    .plans-list {
+      border-top: 1px solid var(--rule);
+    }
+
+    .plan-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 220px;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+
+    .plan-status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-top: 8px;
+    }
+    .plan-status-dot.active { background: var(--accent); box-shadow: 0 0 0 4px rgba(200,85,61,0.12); }
+    .plan-status-dot.explore { background: transparent; border: 1px solid var(--ink-2); }
+    .plan-status-dot.shipped { background: var(--ink); opacity: 0.4; }
+
+    .plan-body { }
+
+    .plan-title {
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .plan-desc {
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-2);
+    }
+
+    .plan-state {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-3);
+      text-align: right;
+    }
+    .plan-state .state-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--bg-warm);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      color: var(--ink-2);
+      margin-right: 8px;
+    }
+    .plan-state .state-tag.active { color: var(--accent); border-color: rgba(200,85,61,0.3); background: var(--accent-soft); }
+
+    @media (max-width: 700px) {
+      .plan-row { grid-template-columns: 20px 1fr; gap: 16px; }
+      .plan-state { grid-column: 2; text-align: left; margin-top: 8px; }
+    }
+
+    /* ==================== ABOUT ==================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-prose {
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.75;
+      color: var(--ink-2);
+    }
+
+    .about-prose p { margin-bottom: 24px; }
+    .about-prose p:last-child { margin-bottom: 0; }
+    .about-prose em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .about-prose .accent-dot {
+      color: var(--accent);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+    }
+
+    .about-side {
+      padding-top: 12px;
+    }
+
+    .about-side-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .about-side-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--ink-3);
+    }
+
+    .contact-list {
+      list-style: none;
+      border-top: 1px solid var(--rule);
+    }
+    .contact-list li {
+      border-bottom: 1px solid var(--rule);
+    }
+    .contact-list a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 4px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: padding 0.3s var(--easing);
+    }
+    .contact-list a:hover { padding-left: 12px; }
+    .contact-list .label {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 16px;
+    }
+    .contact-list .value {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+    .contact-list a:hover .value { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-prose { font-size: 19px; }
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+      border-top: 1px solid var(--rule-2);
+      padding: 56px 0 72px;
+      margin-top: 80px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-mark {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .footer-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-meta .accent {
+      color: var(--accent);
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+    }
+
+    /* ==================== SCROLL PROGRESS ==================== */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 200;
+      width: 0;
+      transition: width 0.1s linear;
+    }
+
+    /* ==================== ASK CAROL · 极简浮链 ==================== */
+    .ask-link {
+      position: fixed;
+      bottom: 28px;
+      right: 32px;
+      z-index: 150;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px 10px 14px;
+      background: rgba(250, 248, 243, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--rule-2);
+      border-radius: 999px;
+      color: var(--ink);
+      cursor: pointer;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-decoration: none;
+      transition:
+        transform 0.4s var(--easing),
+        border-color 0.4s ease,
+        background 0.4s ease,
+        box-shadow 0.4s var(--easing);
+    }
+
+    .ask-link::before {
+      /* 呼吸小点 —— "我在线" 信号 */
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(200, 85, 61, 0.5);
+      animation: pulse 2.8s var(--easing) infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(200, 85, 61, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(200, 85, 61, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(200, 85, 61, 0); }
+    }
+
+    .ask-link .arrow {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 14px;
+      color: var(--ink-3);
+      transition: transform 0.35s var(--easing), color 0.3s ease;
+    }
+
+    .ask-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--ink);
+      background: var(--bg);
+      box-shadow:
+        0 1px 0 rgba(26,26,26,0.04),
+        0 10px 30px -12px rgba(26,26,26,0.18);
+    }
+    .ask-link:hover .arrow {
+      transform: translateX(4px);
+      color: var(--ink);
+    }
+
+    /* 当 panel 打开时,浮链淡出 */
+    body.chat-open .ask-link {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    /* ==================== ASK PANEL · 滑入面板 ==================== */
+    .ask-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 22, 20, 0.18);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 180;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    body.chat-open .ask-backdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ask-panel {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: 460px;
+      max-width: 100vw;
+      background: var(--bg);
+      border-left: 1px solid var(--rule-2);
+      z-index: 200;
+      transform: translateX(100%);
+      transition: transform 0.55s var(--easing);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -40px 0 80px -40px rgba(26,22,20,0.15);
+    }
+    body.chat-open .ask-panel { transform: translateX(0); }
+
+    .ask-panel-header {
+      padding: 28px 32px 24px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .ask-panel-title {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .ask-panel-sub {
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+
+    .ask-panel-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink-3);
+      font-size: 22px;
+      line-height: 1;
+      padding: 4px 8px;
+      transition: color 0.2s ease, transform 0.3s var(--easing);
+      font-family: 'Inter', sans-serif;
+    }
+    .ask-panel-close:hover {
+      color: var(--ink);
+      transform: rotate(90deg);
+    }
+
+    .ask-panel-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ask-section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .ask-section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--ink-3);
+    }
+
+    .topic-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .topic-chip {
+      text-align: left;
+      padding: 16px 20px;
+      background: var(--bg-warm);
+      border: 1px solid var(--rule);
+      cursor: pointer;
+      font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.4s var(--easing),
+        border-color 0.4s ease,
+        background 0.4s ease;
+    }
+    .topic-chip::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 0; height: 2px;
+      background: var(--ink);
+      transition: width 0.5s var(--easing);
+    }
+    .topic-chip:hover {
+      transform: translateX(4px);
+      border-color: var(--ink);
+      background: var(--bg);
+    }
+    .topic-chip:hover::before { width: calc(100% + 2px); }
+
+    .topic-chip .q-mark {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .ask-hint {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--ink-3);
+      text-align: center;
+      padding: 16px 0 4px;
+    }
+
+    .ask-panel-input {
+      padding: 20px 32px 16px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .ask-input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 4px 4px 16px;
+      border: 1px solid var(--rule-2);
+      background: var(--bg);
+      transition: border-color 0.3s ease;
+    }
+    .ask-input-row:focus-within { border-color: var(--ink); }
+
+    .ask-input-row textarea {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      resize: none;
+      padding: 12px 0;
+      font-family: 'Inter', 'PingFang SC', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+      max-height: 100px;
+    }
+    .ask-input-row textarea::placeholder {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--ink-3);
+    }
+
+    .ask-send-btn {
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      transition: background 0.3s ease, transform 0.2s ease;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+    }
+    .ask-send-btn:hover { background: var(--accent); }
+
+    .ask-panel-footer {
+      padding: 12px 32px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.05em;
+    }
+    .ask-panel-footer .quota .num { color: var(--ink-2); font-weight: 500; }
+    .ask-panel-footer .powered { font-family: 'Fraunces', serif; font-style: italic; }
+
+    @media (max-width: 520px) {
+      .ask-panel { width: 100vw; }
+      .ask-link { right: 16px; bottom: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="container">
+    <!-- ============ NAV ============ -->
+    <nav>
+      <a href="#top" class="wordmark">Carol</a>
+      <div class="nav-links">
+        <a href="#insights">Insights</a>
+        <a href="#perspectives">Perspectives</a>
+        <a href="#plans">Plans</a>
+        <a href="#about">About</a>
+        <a href="#" data-open-chat>Chat</a>
+      </div>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="edition-marker">No. 001 · Summer 2026</div>
+
+      <div class="hero-eyebrow">A Slower Pulse</div>
+
+      <h1 class="hero-headline">
+        <span class="line-1">在被加速的世界里,</span>
+        <span class="line-2">做一份慢下来的观察</span>
+      </h1>
+
+      <div class="hero-byline">
+        <span class="name">Carol</span>
+        <span class="sep"></span>
+        <span>AI 产品人 · 内容策展者</span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#insights" class="text-link">
+          Read the latest essay
+          <span class="arrow">→</span>
+        </a>
+        <a href="#" data-open-chat class="text-link">
+          Talk to my digital twin
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ § 01 · INSIGHTS ============ -->
+    <section class="page-section" id="insights">
+      <div class="section-head">
+        <span class="section-num">§ 01</span>
+        <h2 class="section-title">Insights</h2>
+        <span class="section-kicker">最近在想的事</span>
+      </div>
+
+      <div class="insights-list">
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 22, 2026</span>
+          <span class="insight-tag">Essay</span>
+          <span class="insight-title">为什么大模型的"幻觉"不是 bug,而是定价信号</span>
+          <span class="insight-arrow">→</span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 19, 2026</span>
+          <span class="insight-tag">Note</span>
+          <span class="insight-title">关于 Claude 新文档界面的几个产品观察</span>
+          <span class="insight-arrow">→</span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 15, 2026</span>
+          <span class="insight-tag">Essay</span>
+          <span class="insight-title">AI 应用层最该被重新设计的不是 UI,是反馈环</span>
+          <span class="insight-arrow">→</span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 11, 2026</span>
+          <span class="insight-tag">Note</span>
+          <span class="insight-title">Cursor 商业模式里一个尚未被讨论的角度</span>
+          <span class="insight-arrow">→</span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 7, 2026</span>
+          <span class="insight-tag">Essay</span>
+          <span class="insight-title">"Agent 即产品"的三种误读</span>
+          <span class="insight-arrow">→</span>
+        </a>
+
+        <a href="#" class="insight-row">
+          <span class="insight-date">May 3, 2026</span>
+          <span class="insight-tag">Note</span>
+          <span class="insight-title">周末读到的一段 Karpathy,值得复述</span>
+          <span class="insight-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ § 02 · PERSPECTIVES ============ -->
+    <section class="page-section" id="perspectives">
+      <div class="section-head">
+        <span class="section-num">§ 02</span>
+        <h2 class="section-title">Perspectives</h2>
+        <span class="section-kicker">收藏的、值得复读的观点</span>
+      </div>
+
+      <div class="perspectives-grid">
+
+        <article class="perspective-card">
+          <span class="perspective-mark">"</span>
+          <p class="perspective-quote">
+            Software 1.0 是手写代码;Software 2.0 是神经网络的权重;Software 3.0 是 prompt。
+          </p>
+          <div class="perspective-source">
+            <span class="author-name">Andrej Karpathy</span>
+            <span class="dot"></span>
+            <span>Software 3.0, May 2026</span>
+          </div>
+          <div class="perspective-take">
+            <span class="label">Carol —</span>
+            这个分类很顺,但它低估了转换成本。把 SOP 翻译成 prompt 比把伪代码翻译成代码难得多——
+            它要捕捉的是隐性知识,不是显性逻辑。
+          </div>
+        </article>
+
+        <article class="perspective-card">
+          <span class="perspective-mark">"</span>
+          <p class="perspective-quote">
+            这个时代最持久的能力,是学习任何你想学的东西。
+          </p>
+          <div class="perspective-source">
+            <span class="author-name">Naval Ravikant</span>
+            <span class="dot"></span>
+            <span>Almanack, 2020</span>
+          </div>
+          <div class="perspective-take">
+            <span class="label">Carol —</span>
+            十年前对,今天更对。当工具的 half-life 缩短到 18 个月,
+            可迁移的"元能力"才是真正的复利。
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ § 03 · PLANS ============ -->
+    <section class="page-section" id="plans">
+      <div class="section-head">
+        <span class="section-num">§ 03</span>
+        <h2 class="section-title">Plans</h2>
+        <span class="section-kicker">正在做、想做、做完了</span>
+      </div>
+
+      <div class="plans-list">
+
+        <div class="plan-row">
+          <span class="plan-status-dot active" title="进行中"></span>
+          <div class="plan-body">
+            <div class="plan-title">Carol's Website</div>
+            <p class="plan-desc">用 Claude Code 把这个网站做出来,两天 MVP。一次从 idea 到 product 的完整练习。</p>
+          </div>
+          <div class="plan-state"><span class="state-tag active">In Progress</span></div>
+        </div>
+
+        <div class="plan-row">
+          <span class="plan-status-dot active" title="进行中"></span>
+          <div class="plan-body">
+            <div class="plan-title">AI 产品周记</div>
+            <p class="plan-desc">每周一份精选短评,记录我在 AI 产品圈看到的、想到的、被反复触发的判断。</p>
+          </div>
+          <div class="plan-state"><span class="state-tag active">In Progress</span></div>
+        </div>
+
+        <div class="plan-row">
+          <span class="plan-status-dot explore" title="探索中"></span>
+          <div class="plan-body">
+            <div class="plan-title">数字分身 Agent v2</div>
+            <p class="plan-desc">从全文 prompt 升级到 RAG,加上对话历史。让分身真的能"代我回答"。</p>
+          </div>
+          <div class="plan-state"><span class="state-tag">Exploring</span></div>
+        </div>
+
+        <div class="plan-row">
+          <span class="plan-status-dot shipped" title="已完成"></span>
+          <div class="plan-body">
+            <div class="plan-title">The Big Inventory of AI Products</div>
+            <p class="plan-desc">2025 年底做的一份 AI 产品分类图谱,被几个朋友收藏,后续不再维护。</p>
+          </div>
+          <div class="plan-state"><span class="state-tag">Shipped · 2025</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ § 04 · ABOUT ============ -->
+    <section class="page-section" id="about">
+      <div class="section-head">
+        <span class="section-num">§ 04</span>
+        <h2 class="section-title">About</h2>
+        <span class="section-kicker">关于这个站、关于我</span>
+      </div>
+
+      <div class="about-grid">
+
+        <div class="about-prose">
+          <p>
+            我是 <em>Carol</em>,白天做 AI 产品,晚上把看见的、想到的、喜欢的人和观点
+            写下来。这个站不是博客,更像一份给自己也开放给别人的 <em>季刊</em>。
+          </p>
+          <p>
+            AI 让"写作"和"被阅读"都在加速,所以我反向做了一件事——
+            把更新慢下来、把判断写出来、把策展留出来。每一篇都希望值得被读两遍<span class="accent-dot">.</span>
+          </p>
+          <p>
+            如果你也在思考 AI 与产品、与表达、与生活方式的关系,欢迎留个联系方式,
+            或者直接去跟我的数字分身聊聊。
+          </p>
+        </div>
+
+        <div class="about-side">
+          <div class="about-side-label">Elsewhere</div>
+          <ul class="contact-list">
+            <li><a href="#"><span class="label">Email</span><span class="value">carol@···</span></a></li>
+            <li><a href="#"><span class="label">Twitter / X</span><span class="value">@carol</span></a></li>
+            <li><a href="#"><span class="label">Newsletter</span><span class="value">Substack</span></a></li>
+            <li><a href="#"><span class="label">RSS</span><span class="value">Feed</span></a></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-mark">Carol — A Slower Pulse</div>
+      <div class="footer-meta">
+        <span>© 2026</span>
+        &nbsp;·&nbsp;
+        <span>No. 001 · Summer Edition</span>
+        &nbsp;·&nbsp;
+        <span>Built with <span class="accent">Claude Code</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ ASK CAROL · 极简浮链 + 滑入面板 ============ -->
+  <button class="ask-link" data-open-chat aria-label="Ask Carol">
+    Ask Carol
+    <span class="arrow">→</span>
+  </button>
+
+  <div class="ask-backdrop" data-close-chat></div>
+
+  <aside class="ask-panel" role="dialog" aria-label="Chat with Carol's digital twin">
+    <div class="ask-panel-header">
+      <div>
+        <h3 class="ask-panel-title">Ask Carol</h3>
+        <div class="ask-panel-sub">这是 Carol 的数字分身,基于她的笔记与观点</div>
+      </div>
+      <button class="ask-panel-close" data-close-chat aria-label="关闭">×</button>
+    </div>
+
+    <div class="ask-panel-body">
+      <div class="ask-section-label">Try asking</div>
+
+      <div class="topic-chips">
+        <button class="topic-chip">
+          <span class="q-mark">Q.</span>你最近在想哪些 AI 产品方向?
+        </button>
+        <button class="topic-chip">
+          <span class="q-mark">Q.</span>推荐一篇你最近读过、值得复读的文章?
+        </button>
+        <button class="topic-chip">
+          <span class="q-mark">Q.</span>对一个产品人,Claude Code 改变了什么?
+        </button>
+        <button class="topic-chip">
+          <span class="q-mark">Q.</span>"Software 3.0" 这个说法你怎么看?
+        </button>
+      </div>
+
+      <div class="ask-hint">— 或者直接在下面问我别的 —</div>
+    </div>
+
+    <div class="ask-panel-input">
+      <div class="ask-input-row">
+        <textarea
+          rows="1"
+          placeholder="问点什么…"
+          aria-label="输入问题"></textarea>
+        <button class="ask-send-btn" aria-label="发送">↵</button>
+      </div>
+    </div>
+
+    <div class="ask-panel-footer">
+      <span class="quota">本月剩余 <span class="num">5 / 5</span> 次自由提问</span>
+      <span class="powered">Powered by Claude</span>
+    </div>
+  </aside>
+
+  <script>
+    // 滚动进度条
+    const progress = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = (scrolled / docHeight) * 100;
+      progress.style.width = pct + '%';
+    });
+
+    // Ask Carol 面板开关
+    const openTriggers = document.querySelectorAll('[data-open-chat]');
+    const closeTriggers = document.querySelectorAll('[data-close-chat]');
+
+    function openChat(e) {
+      if (e) e.preventDefault();
+      document.body.classList.add('chat-open');
+    }
+    function closeChat() {
+      document.body.classList.remove('chat-open');
+    }
+
+    openTriggers.forEach(el => el.addEventListener('click', openChat));
+    closeTriggers.forEach(el => el.addEventListener('click', closeChat));
+
+    // Esc 关闭
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.body.classList.contains('chat-open')) closeChat();
+    });
+
+    // 点击话题卡也演示一下(目前没接 API)
+    document.querySelectorAll('.topic-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const text = chip.textContent.replace('Q.', '').trim();
+        const input = document.querySelector('.ask-input-row textarea');
+        input.value = text;
+        input.focus();
+      });
+    });
+  </script>
+
+</body>
+</html>
