@@ -32,7 +32,7 @@
     "try": "聞いてみる",
     "placeholder": "質問を入力…",
     "send": "送信",
-    "quota": "今月の無料質問: 残り {n} 回",
+    "quota": "今月の無料質問: 残り {used} / {total} 回",
     "poweredBy": "Powered by Claude"
   },
   "footer": {

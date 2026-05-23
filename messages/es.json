@@ -32,7 +32,7 @@
     "try": "Prueba a preguntar",
     "placeholder": "Escribe tu pregunta…",
     "send": "Enviar",
-    "quota": "Te quedan {n} preguntas gratis este mes",
+    "quota": "Te quedan {used} / {total} preguntas gratis este mes",
     "poweredBy": "Powered by Claude"
   },
   "footer": {

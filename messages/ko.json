@@ -32,7 +32,7 @@
     "try": "질문해 보기",
     "placeholder": "질문을 입력하세요…",
     "send": "보내기",
-    "quota": "이번 달 무료 질문 {n}회 남음",
+    "quota": "이번 달 무료 질문 {used} / {total}회 남음",
     "poweredBy": "Powered by Claude"
   },
   "footer": {
