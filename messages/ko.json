@@ -40,6 +40,6 @@
     "builtWith": "Built with Claude Code"
   },
   "welcome": {
-    "greeting": "환영합니다 — {serial}번째 독자입니다"
+    "greeting": "환영합니다 — <num>{serial}</num>번째 독자입니다"
   }
 }

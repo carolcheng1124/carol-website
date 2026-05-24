@@ -40,6 +40,6 @@
     "builtWith": "Built with Claude Code"
   },
   "welcome": {
-    "greeting": "Bem-vindo — você é o leitor número {serial}"
+    "greeting": "Bem-vindo — você é o leitor número <num>{serial}</num>"
   }
 }

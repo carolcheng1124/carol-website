@@ -1307,16 +1307,16 @@ body.chat-open .ask-panel { transform: translateX(0); }
   right: 0;
   z-index: 60;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
-  gap: 12px;
-  padding: 8px 16px;
-  background: var(--bg-warm, #F3EFE6);
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  gap: 14px;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg-warm, #F3EFE6) 96%, var(--ink) 4%);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
   font-family: 'Fraunces', 'Noto Serif SC', serif;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  color: var(--ink-2, #555);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  color: var(--ink, #1A1A1A);
   opacity: 0;
   transform: translateY(-100%);
   transition: opacity 0.6s var(--easing), transform 0.6s var(--easing);
@@ -1329,6 +1329,21 @@ body.chat-open .ask-panel { transform: translateX(0); }
 }
 .reader-welcome-text { font-style: normal; }
 html[lang="en"] .reader-welcome-text { font-style: italic; }
+
+/* The serial number itself — the only personal beat in this banner.
+   Fraunces italic + accent color, slightly larger than surrounding text.
+   Note: digits aren't Chinese characters, so italic is safe in any locale. */
+.reader-welcome-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--accent, #C8553D);
+  letter-spacing: 0.02em;
+  padding: 0 1px;
+  font-variant-numeric: tabular-nums;
+}
+
 .reader-welcome-close {
   background: none;
   border: 0;
@@ -1339,10 +1354,12 @@ html[lang="en"] .reader-welcome-text { font-style: italic; }
   padding: 2px 6px;
   margin: -2px -6px -2px 0;
   transition: color 0.3s var(--easing);
+  align-self: center;
 }
 .reader-welcome-close:hover { color: var(--ink); }
 
 @media (max-width: 520px) {
-  .reader-welcome { font-size: 12px; padding: 6px 12px; }
+  .reader-welcome { font-size: 13px; padding: 8px 12px; gap: 10px; }
+  .reader-welcome-num { font-size: 15px; }
 }
 

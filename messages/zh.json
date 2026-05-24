@@ -47,6 +47,10 @@
     "builtWith": "Built with Claude Code"
   },
   "welcome": {
-    "greeting": "欢迎,你是第 {serial} 位读者"
+    "morning": "早上好,我的第 <num>{serial}</num> 位云股东",
+    "noon": "午安,我的第 <num>{serial}</num> 位云股东",
+    "afternoon": "下午好,我的第 <num>{serial}</num> 位云股东",
+    "evening": "晚上好,我的第 <num>{serial}</num> 位云股东",
+    "greeting": "欢迎,我的第 <num>{serial}</num> 位云股东"
   }
 }
