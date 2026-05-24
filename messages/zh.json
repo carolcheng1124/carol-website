@@ -36,6 +36,8 @@
       "\"Software 3.0\" 这个说法你怎么看?"
     ],
     "hint": "— 或者直接在下面问我别的 —",
+    "drawHint": "想让我画一张?试试 <code>/画 一只穿西装的橘猫</code>",
+    "drawing": "正在画…",
     "placeholder": "问点什么…",
     "send": "发送",
     "quota": "本月剩余 {used} / {total} 次自由提问",

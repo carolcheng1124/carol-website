@@ -36,6 +36,8 @@
       "What do you make of the \"Software 3.0\" framing?"
     ],
     "hint": "— or just ask me something else below —",
+    "drawHint": "Want me to draw? Try <code>/draw a tabby cat in a suit</code>",
+    "drawing": "Drawing…",
     "placeholder": "Ask something…",
     "send": "Send",
     "quota": "{used} / {total} free questions left this month",

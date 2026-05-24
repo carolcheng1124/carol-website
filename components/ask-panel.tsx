@@ -3,9 +3,49 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 
-type Msg = { role: 'user' | 'assistant'; text: string };
+// text is always present; imageUrl is set on assistant messages from /api/draw.
+// On those, `text` carries the prompt and is shown as caption.
+type Msg = { role: 'user' | 'assistant'; text: string; imageUrl?: string };
+
+// Slash command for image generation. Matches:
+//   /画 一只穿西装的猫
+//   /draw a cat in a suit
+//   /image something
+const DRAW_RE = /^\/(?:画|draw|image)\s+(.+)$/i;
 
 const FREE_QUOTA = 5;
+// sessionStorage so chat history + quota survive page refresh but not a
+// fresh tab. Per-locale key so switching language gives a clean panel.
+const STORAGE_KEY = (lang: string) => `askpanel:${lang}`;
+const MAX_PERSISTED_MSGS = 40;
+
+type Persisted = { messages: Msg[]; used: number };
+
+function loadPersisted(lang: string): Persisted | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY(lang));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as Persisted;
+    if (!Array.isArray(parsed.messages) || typeof parsed.used !== 'number') return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function savePersisted(lang: string, data: Persisted) {
+  if (typeof window === 'undefined') return;
+  try {
+    const trimmed: Persisted = {
+      messages: data.messages.slice(-MAX_PERSISTED_MSGS),
+      used: data.used,
+    };
+    sessionStorage.setItem(STORAGE_KEY(lang), JSON.stringify(trimmed));
+  } catch {
+    // quota / private-mode — silently degrade to in-memory
+  }
+}
 
 export default function AskPanel({ lang }: { lang: string }) {
   const t = useTranslations('ask');
@@ -17,11 +57,32 @@ export default function AskPanel({ lang }: { lang: string }) {
   const [streaming, setStreaming] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [used, setUsed] = useState(0);
+  const [hydrated, setHydrated] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => setOpen(false), []);
+
+  // Hydrate from sessionStorage once on mount (and on lang change).
+  useEffect(() => {
+    const cached = loadPersisted(lang);
+    if (cached) {
+      setMessages(cached.messages);
+      setUsed(cached.used);
+    } else {
+      setMessages([]);
+      setUsed(0);
+    }
+    setHydrated(true);
+  }, [lang]);
+
+  // Persist whenever messages or used change (skip the initial hydration tick
+  // and skip mid-stream — partial assistant text shouldn't get saved).
+  useEffect(() => {
+    if (!hydrated || streaming) return;
+    savePersisted(lang, { messages, used });
+  }, [lang, messages, used, hydrated, streaming]);
 
   // body class + Esc to close
   useEffect(() => {
@@ -57,6 +118,15 @@ export default function AskPanel({ lang }: { lang: string }) {
     if (!trimmed || streaming) return;
     if (overQuota) return;
 
+    const drawMatch = trimmed.match(DRAW_RE);
+    if (drawMatch) {
+      await sendDraw(drawMatch[1].trim(), trimmed);
+    } else {
+      await sendChat(trimmed);
+    }
+  }
+
+  async function sendChat(trimmed: string) {
     setErrorMsg(null);
     setInput('');
     const userMsg: Msg = { role: 'user', text: trimmed };
@@ -70,7 +140,11 @@ export default function AskPanel({ lang }: { lang: string }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           lang,
-          messages: [...messages, userMsg].map(({ role, text }) => ({ role, text })),
+          // Only send text-only messages; image messages stay client-side and
+          // are not part of the chat context.
+          messages: [...messages, userMsg]
+            .filter((m) => !m.imageUrl)
+            .map(({ role, text }) => ({ role, text })),
         }),
       });
 
@@ -92,6 +166,45 @@ export default function AskPanel({ lang }: { lang: string }) {
           return next;
         });
       }
+      setUsed((n) => n + 1);
+    } catch (err) {
+      const reason = err instanceof Error ? err.message : 'unknown';
+      setErrorMsg(`${t('errorGeneric')} (${reason})`);
+      setMessages((prev) => prev.slice(0, -1));
+    } finally {
+      setStreaming(false);
+    }
+  }
+
+  async function sendDraw(prompt: string, original: string) {
+    setErrorMsg(null);
+    setInput('');
+    const userMsg: Msg = { role: 'user', text: original };
+    const draft: Msg = { role: 'assistant', text: prompt };
+    setMessages((prev) => [...prev, userMsg, draft]);
+    setStreaming(true);
+
+    try {
+      const res = await fetch('/api/draw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt, lang }),
+      });
+      const data = (await res.json().catch(() => null)) as
+        | { url?: string; error?: string }
+        | null;
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.error || `HTTP ${res.status}`);
+      }
+      setMessages((prev) => {
+        const next = [...prev];
+        next[next.length - 1] = {
+          role: 'assistant',
+          text: prompt,
+          imageUrl: data.url,
+        };
+        return next;
+      });
       setUsed((n) => n + 1);
     } catch (err) {
       const reason = err instanceof Error ? err.message : 'unknown';
@@ -165,15 +278,37 @@ export default function AskPanel({ lang }: { lang: string }) {
                 ))}
               </div>
               <div className="ask-hint">{t('hint')}</div>
+              <div className="ask-draw-hint">
+                {t.rich('drawHint', {
+                  code: (chunks) => <code>{chunks}</code>,
+                })}
+              </div>
             </>
           ) : (
             messages.map((m, i) => {
               const isLast = i === messages.length - 1;
+              const isPendingImage =
+                m.role === 'assistant' && !m.imageUrl && isLast && streaming &&
+                DRAW_RE.test(messages[messages.length - 2]?.text ?? '');
               return (
                 <div key={i} className={`ask-msg ${m.role}`}>
-                  {m.text}
-                  {isLast && m.role === 'assistant' && streaming && (
-                    <span className="cursor" aria-hidden />
+                  {m.imageUrl ? (
+                    <figure className="ask-msg-image">
+                      <img src={m.imageUrl} alt={m.text} loading="lazy" />
+                      <figcaption>{m.text}</figcaption>
+                    </figure>
+                  ) : isPendingImage ? (
+                    <span className="ask-msg-drawing">
+                      {t('drawing')}
+                      <span className="cursor" aria-hidden />
+                    </span>
+                  ) : (
+                    <>
+                      {m.text}
+                      {isLast && m.role === 'assistant' && streaming && (
+                        <span className="cursor" aria-hidden />
+                      )}
+                    </>
                   )}
                 </div>
               );
