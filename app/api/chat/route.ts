@@ -1,6 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-export const runtime = 'edge';
+// Node.js runtime: the Anthropic SDK uses node:crypto / node:stream
+// internally, which Vercel's Edge runtime forbids. Node runtime in
+// Next 16 streams responses natively, so there's no streaming penalty.
+export const runtime = 'nodejs';
 
 type IncomingMsg = { role: 'user' | 'assistant'; text: string };
 

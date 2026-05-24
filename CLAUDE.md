@@ -29,7 +29,7 @@ This file is auto-loaded by Claude Code in every session. Read `HANDOFF.md` once
 - Use Tailwind for layout. Use CSS variables for theme tokens (defined in `globals.css`).
 - Use shadcn/ui sparingly — always restyle to match editorial system.
 - **Do not use shadcn `Dialog` for the AskPanel**. Build it custom (see `hero-mockup.html` for exact CSS/HTML pattern).
-- `/api/chat` must run on Edge Runtime (`export const runtime = 'edge'`) for streaming.
+- `/api/chat` and `/api/welcome` run on Node.js runtime (`export const runtime = 'nodejs'`). The Anthropic SDK and `@supabase/supabase-js` both use `node:crypto` internally, which Vercel's Edge runtime rejects. Node runtime in Next 16 streams responses natively — no streaming penalty.
 - Use `next-intl`, not `next-i18next`.
 - Use `@supabase/ssr` for server-side Supabase (not the deprecated auth-helpers).
 

@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-export const runtime = 'edge';
+// Node.js runtime — see /api/chat/route.ts for rationale.
+export const runtime = 'nodejs';
 
 // Returns the visitor's reader serial. The client component is responsible for
 // caching the value in a cookie so repeat visits don't insert a new row.
