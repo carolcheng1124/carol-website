@@ -33,7 +33,12 @@ export default async function Insights({ lang }: { lang: string }) {
             >
               <span className="insight-date">{formatDate(item.date, lang)}</span>
               <span className="insight-tag">{item.tag}</span>
-              <span className="insight-title">{item.title}</span>
+              <div className="insight-title-col">
+                <span className="insight-title">{item.title}</span>
+                {item.summary && (
+                  <span className="insight-summary">{item.summary}</span>
+                )}
+              </div>
               <span className="insight-arrow">→</span>
             </Link>
           ))}

@@ -14,6 +14,7 @@ export type InsightMeta = {
   title: string;
   date: string; // ISO YYYY-MM-DD
   tag: string;  // Essay / Note / Review …
+  summary?: string; // optional one-line hook shown under the title in the list
 };
 
 export type Insight = InsightMeta & {
@@ -64,6 +65,16 @@ function readMarkdown(filePath: string) {
   return matter(raw);
 }
 
+// gray-matter auto-parses unquoted YAML dates into Date objects whose toString
+// is "Thu May 07 2026 …" — useless for sorting. Normalize back to YYYY-MM-DD.
+function normalizeDate(v: unknown): string {
+  if (v instanceof Date && !Number.isNaN(v.getTime())) {
+    return v.toISOString().slice(0, 10);
+  }
+  if (typeof v === 'string') return v;
+  return v == null ? '' : String(v);
+}
+
 // Resolve content for a given lang, falling back to the other lang if missing.
 // HANDOFF: zh primary, en hand-written. For other 6 langs we fall back to en.
 function resolveLang(lang: string): Lang {
@@ -84,8 +95,9 @@ export function getInsights(lang: string): InsightMeta[] {
     return {
       slug,
       title: String(data.title ?? slug),
-      date: String(data.date ?? ''),
+      date: normalizeDate(data.date),
       tag: String(data.tag ?? 'Note'),
+      summary: data.summary ? String(data.summary) : undefined,
     };
   });
 
@@ -102,7 +114,7 @@ export function getInsight(lang: string, slug: string): Insight | null {
   return {
     slug,
     title: String(data.title ?? slug),
-    date: String(data.date ?? ''),
+    date: normalizeDate(data.date),
     tag: String(data.tag ?? 'Note'),
     body: content.trim(),
   };

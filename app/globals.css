@@ -426,6 +426,13 @@ body::before {
   color: var(--accent);
 }
 
+.insight-title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
 .insight-title {
   font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
   font-weight: 500;
@@ -433,6 +440,17 @@ body::before {
   line-height: 1.55;
   color: var(--ink);
   transition: color 0.3s ease;
+}
+
+.insight-summary {
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .insight-arrow {

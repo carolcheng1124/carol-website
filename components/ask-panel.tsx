@@ -110,6 +110,25 @@ export default function AskPanel({ lang }: { lang: string }) {
     if (open) requestAnimationFrame(() => textareaRef.current?.focus());
   }, [open]);
 
+  // Open via URL hash (#ask) — used by Hero "Talk to my digital twin" CTA.
+  // Cleaning the hash afterward prevents back-button leaving the panel half-open.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const checkHash = () => {
+      if (window.location.hash === '#ask') {
+        setOpen(true);
+        history.replaceState(
+          null,
+          '',
+          window.location.pathname + window.location.search,
+        );
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, []);
+
   const remaining = Math.max(0, FREE_QUOTA - used);
   const overQuota = remaining <= 0;
 
@@ -342,9 +361,15 @@ export default function AskPanel({ lang }: { lang: string }) {
         </div>
 
         <div className="ask-panel-footer">
-          <span className="quota">
-            {t('quota', { used: remaining, total: FREE_QUOTA })}
-          </span>
+          {messages.length > 0 ? (
+            <span className="quota">
+              {t('quota', { used: remaining, total: FREE_QUOTA })}
+            </span>
+          ) : (
+            <span className="quota" aria-hidden style={{ visibility: 'hidden' }}>
+              &nbsp;
+            </span>
+          )}
           <span className="powered">{t('poweredBy')}</span>
         </div>
       </aside>

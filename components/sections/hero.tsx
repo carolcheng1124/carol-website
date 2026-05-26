@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
+import { getInsights } from '@/lib/content';
 
 // CSS adds the red "." via .hero-headline .line-2::after, so we strip any
 // trailing period/句号 from the message to avoid doubling.
@@ -6,8 +8,10 @@ function stripTrailingPeriod(s: string) {
   return s.replace(/[。\.]+\s*$/u, '');
 }
 
-export default async function Hero() {
+export default async function Hero({ lang }: { lang: string }) {
   const t = await getTranslations('hero');
+  const latest = getInsights(lang)[0];
+  const readHref = latest ? `/${lang}/insights/${latest.slug}` : '#insights';
   return (
     <section className="hero">
       <div className="container" style={{ width: '100%' }}>
@@ -22,10 +26,10 @@ export default async function Hero() {
           <span>{t('byline')}</span>
         </div>
         <div className="hero-ctas" style={{ marginTop: 64, display: 'flex', gap: 40 }}>
-          <a href="#insights" className="text-link">
+          <Link href={readHref} className="text-link">
             {t('cta_read')} <span className="arrow">→</span>
-          </a>
-          <a href="#about" className="text-link">
+          </Link>
+          <a href="#ask" className="text-link">
             {t('cta_chat')} <span className="arrow">→</span>
           </a>
         </div>

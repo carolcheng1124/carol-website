@@ -15,7 +15,7 @@ export default async function HomePage({
 
   return (
     <>
-      <Hero />
+      <Hero lang={lang} />
       <Insights lang={lang} />
       <Perspectives lang={lang} />
       <Plans lang={lang} />
