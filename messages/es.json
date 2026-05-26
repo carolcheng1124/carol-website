@@ -1,5 +1,10 @@
 {
   "_meta": "DRAFT translation by Claude — verify before launch",
+  "meta": {
+    "title": "Carol — A Slower Pulse",
+    "description": "AI product notes, perspectives I keep, and what I'm building. A quarterly slower pulse in an accelerating world.",
+    "siteName": "Carol — A Slower Pulse"
+  },
   "nav": {
     "insights": "Insights",
     "perspectives": "Perspectives",

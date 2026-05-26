@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Carol —— 一份慢下来的观察",
+    "description": "AI 产品笔记、我留着的观点、我在做的事。在被加速的世界里,一份季度更新的慢节奏。",
+    "siteName": "Carol —— 一份慢下来的观察"
+  },
   "nav": {
     "insights": "Insights",
     "perspectives": "Perspectives",
@@ -31,9 +36,9 @@
     "try": "试试问",
     "topics": [
       "你最近在想哪些 AI 产品方向?",
-      "推荐一篇你最近读过、值得复读的文章?",
-      "对一个产品人,Claude Code 改变了什么?",
-      "\"Software 3.0\" 这个说法你怎么看?"
+      "为什么坚持自己写中文,不让 AI 翻译?",
+      "在被加速的世界里,怎么真的慢下来?",
+      "AI Pilled 的人,现在还要学编程吗?"
     ],
     "hint": "— 或者直接在下面问我别的 —",
     "drawHint": "想让我画一张?试试 <code>/画 一只穿西装的橘猫</code>",

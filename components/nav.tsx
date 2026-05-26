@@ -11,7 +11,7 @@ export default async function Nav({ lang }: { lang: string }) {
         </Link>
         <div className="nav-links">
           <a href="#insights">{t('insights')}</a>
-          <a href="#perspectives">{t('perspectives')}</a>
+          <Link href={`/${lang}/perspectives`}>{t('perspectives')}</Link>
           <a href="#plans">{t('plans')}</a>
           <a href="#about">{t('about')}</a>
         </div>
