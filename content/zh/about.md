@@ -1,18 +1,14 @@
 ---
 contacts:
   - label: "Email"
-    value: "carol@···"
-    href: "mailto:carol@example.com"
+    value: "carolcheng1124@gmail.com"
+    href: "mailto:carolcheng1124@gmail.com"
   - label: "Twitter / X"
-    value: "@carol"
-    href: "https://twitter.com/carol"
-  - label: "Newsletter"
-    value: "Substack"
-    href: "#"
-  - label: "RSS"
-    value: "Feed"
-    href: "/rss.xml"
+    value: "@CarolDailyHah"
+    href: "https://x.com/CarolDailyHah"
 ---
+
+**清华本科 · 大厂 AI PM · 亿级用户产品增长 · AI Pilled**
 
 我是 **Carol**,白天做 AI 产品,晚上把看见的、想到的、喜欢的人和观点写下来。这个站不是博客,更像一份给自己也开放给别人的 **季刊**。
 

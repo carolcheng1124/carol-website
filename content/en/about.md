@@ -1,18 +1,14 @@
 ---
 contacts:
   - label: "Email"
-    value: "carol@···"
-    href: "mailto:carol@example.com"
+    value: "carolcheng1124@gmail.com"
+    href: "mailto:carolcheng1124@gmail.com"
   - label: "Twitter / X"
-    value: "@carol"
-    href: "https://twitter.com/carol"
-  - label: "Newsletter"
-    value: "Substack"
-    href: "#"
-  - label: "RSS"
-    value: "Feed"
-    href: "/rss.xml"
+    value: "@CarolDailyHah"
+    href: "https://x.com/CarolDailyHah"
 ---
+
+**Tsinghua undergrad · AI PM @ major tech co · 100M+ user product growth · AI-pilled**
 
 I'm **Carol**. By day I build AI products; by night I write down the people, ideas and observations I want to keep. This isn't a blog — it's closer to a **quarterly**, kept open to whoever finds it useful.
 
