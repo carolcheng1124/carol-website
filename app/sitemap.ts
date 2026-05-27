@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: lang === routing.defaultLocale ? 1.0 : 0.8,
     });
     entries.push({
+      url: `${SITE_URL}/${lang}/news`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    });
+    entries.push({
       url: `${SITE_URL}/${lang}/perspectives`,
       lastModified: now,
       changeFrequency: 'monthly',

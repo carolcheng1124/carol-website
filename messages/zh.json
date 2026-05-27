@@ -5,6 +5,7 @@
     "siteName": "Carol —— AI-Pilled 日报"
   },
   "nav": {
+    "news": "News",
     "insights": "Insights",
     "perspectives": "Perspectives",
     "plans": "Plans",
@@ -58,5 +59,11 @@
     "afternoon": "下午好,我的第 <num>{serial}</num> 位云股东",
     "evening": "晚上好,我的第 <num>{serial}</num> 位云股东",
     "greeting": "欢迎,我的第 <num>{serial}</num> 位云股东"
+  },
+  "news": {
+    "title": "News",
+    "kicker": "AI 圈每天发生了什么",
+    "intro": "来源:OpenAI / Anthropic / DeepMind / 月之暗面 / arXiv 等公开 RSS。每日 06:00 / 18:00 自动更新。",
+    "aiTakeLabel": "来自姗姗的 AI 分身"
   }
 }

@@ -265,6 +265,84 @@ body::before {
   flex-wrap: wrap;
 }
 
+/* ------------------------------------------------------------
+   Hero collapse — 5s after first visit, hero shrinks to a thin
+   banner so News/Tools/Notes etc. become the visible above-fold.
+   sessionStorage'd so subsequent navigation in-session starts
+   collapsed (no transition flash).
+   ------------------------------------------------------------ */
+.hero {
+  overflow: hidden;
+}
+
+/* Transitions only enabled after first paint to avoid SSR/CSR flash */
+.hero.hero-animate,
+.hero.hero-animate .hero-eyebrow,
+.hero.hero-animate .hero-headline,
+.hero.hero-animate .hero-byline,
+.hero.hero-animate .hero-ctas {
+  transition:
+    min-height 0.9s var(--easing),
+    padding 0.9s var(--easing),
+    opacity 0.6s var(--easing),
+    transform 0.9s var(--easing),
+    margin 0.6s var(--easing),
+    font-size 0.6s var(--easing),
+    max-height 0.9s var(--easing);
+}
+
+.hero.hero-collapsed {
+  min-height: 0;
+  padding: 16px 0 18px;
+}
+
+.hero.hero-collapsed .hero-eyebrow {
+  margin-bottom: 0;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  opacity: 0.75;
+}
+
+.hero.hero-collapsed .hero-headline {
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  margin-top: 6px;
+  display: inline;
+}
+
+.hero.hero-collapsed .hero-headline .line-1,
+.hero.hero-collapsed .hero-headline .line-2 {
+  display: inline;
+  white-space: normal;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.hero.hero-collapsed .hero-headline .line-2 {
+  margin-left: 0.4em;
+}
+
+.hero.hero-collapsed .hero-headline .line-2::after {
+  font-size: 1em;
+}
+
+/* Byline + CTAs fade out and collapse */
+.hero.hero-collapsed .hero-byline,
+.hero.hero-collapsed .hero-ctas {
+  max-height: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .hero.hero-collapsed { padding: 14px 0; }
+  .hero.hero-collapsed .hero-headline { font-size: 13px; }
+}
+
 .text-link {
   font-family: 'Fraunces', serif;
   font-style: italic;
@@ -476,6 +554,147 @@ body::before {
     padding: 24px 0;
   }
   .insight-arrow { display: none; }
+}
+
+/* ============================================================
+   § NEWS — AI-Pilled Daily list
+   Mirrors .insight-row visual pattern, with `source` instead of
+   `tag` and an optional `.ai-take` block underneath each card.
+   ============================================================ */
+.news-intro {
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-3);
+  max-width: 720px;
+  margin: -32px 0 56px;
+  letter-spacing: 0.01em;
+}
+
+.news-list {
+  border-top: 1px solid var(--rule);
+}
+
+.news-row {
+  display: grid;
+  grid-template-columns: 110px 130px 1fr 32px;
+  gap: 32px;
+  padding: 28px 16px 28px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: padding 0.5s var(--easing), background 0.5s ease;
+}
+
+.news-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--ink);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s var(--easing);
+}
+
+.news-row:hover {
+  padding-left: 24px;
+  background: var(--bg-warm);
+}
+.news-row:hover::before { transform: scaleY(1); }
+
+.news-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+.news-source {
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  text-transform: uppercase;
+}
+
+.news-title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.news-title {
+  font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--ink);
+  transition: color 0.3s ease;
+}
+
+.news-summary {
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.news-arrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: var(--ink-3);
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: all 0.5s var(--easing);
+  justify-self: end;
+}
+
+.news-row:hover .news-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .news-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 24px 0;
+  }
+  .news-arrow { display: none; }
+}
+
+/* AI take — used on news cards (P2) and perspectives. Always labeled. */
+.ai-take {
+  margin-top: 14px;
+  padding: 14px 16px 14px 18px;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-soft);
+}
+
+.ai-take-label {
+  display: inline-block;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.ai-take-body {
+  font-family: 'Fraunces', 'Noto Serif SC', 'Songti SC', serif;
+  font-style: normal;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
 }
 
 /* ============================================================

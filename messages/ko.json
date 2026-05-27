@@ -6,6 +6,7 @@
     "siteName": "Carol — The AI-Pilled Daily"
   },
   "nav": {
+    "news": "News",
     "insights": "Insights",
     "perspectives": "Perspectives",
     "plans": "Plans",
@@ -45,5 +46,11 @@
   },
   "welcome": {
     "greeting": "환영합니다 — <num>{serial}</num>번째 독자입니다"
+  },
+  "news": {
+    "title": "News",
+    "kicker": "What happened in AI today",
+    "intro": "Sources: OpenAI / Anthropic / DeepMind / Moonshot / arXiv and other public RSS feeds. Updated twice daily at 06:00 / 18:00.",
+    "aiTakeLabel": "Carol's AI twin says"
   }
 }

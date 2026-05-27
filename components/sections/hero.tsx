@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { getInsights } from '@/lib/content';
+import HeroFrame from './hero-frame';
 
 // CSS adds the red "." via .hero-headline .line-2::after, so we strip any
 // trailing period/句号 from the message to avoid doubling.
@@ -10,10 +10,9 @@ function stripTrailingPeriod(s: string) {
 
 export default async function Hero({ lang }: { lang: string }) {
   const t = await getTranslations('hero');
-  const latest = getInsights(lang)[0];
-  const readHref = latest ? `/${lang}/insights/${latest.slug}` : '#insights';
+  const readHref = `/${lang}/news`;
   return (
-    <section className="hero">
+    <HeroFrame>
       <div className="container" style={{ width: '100%' }}>
         <p className="hero-eyebrow">{t('eyebrow')}</p>
         <h1 className="hero-headline">
@@ -33,8 +32,7 @@ export default async function Hero({ lang }: { lang: string }) {
             {t('cta_chat')} <span className="arrow">→</span>
           </a>
         </div>
-        <div className="edition-marker">EDITION · 01 · {new Date().getFullYear()}</div>
       </div>
-    </section>
+    </HeroFrame>
   );
 }
