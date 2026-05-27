@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Carol — A Slower Pulse",
-    "description": "AI product notes, perspectives I keep, and what I'm building. A quarterly slower pulse in an accelerating world.",
-    "siteName": "Carol — A Slower Pulse"
+    "title": "Carol — The AI-Pilled Daily",
+    "description": "What's happening in AI today + tools I'm building. An AI PM's workspace.",
+    "siteName": "Carol — The AI-Pilled Daily"
   },
   "nav": {
     "insights": "Insights",
@@ -12,11 +12,11 @@
     "chat": "Chat"
   },
   "hero": {
-    "eyebrow": "A Slower Pulse",
-    "headline_line1": "In an accelerating world",
-    "headline_line2": "— a slower pulse.",
-    "byline": "Carol · AI product · curator",
-    "cta_read": "Read the latest edition",
+    "eyebrow": "The AI-Pilled Daily",
+    "headline_line1": "The AI world keeps moving.",
+    "headline_line2": "I'm watching it for you.",
+    "byline": "Carol · AI product · toolmaker",
+    "cta_read": "See today's signals",
     "cta_chat": "Talk to my digital twin"
   },
   "sections": {
@@ -46,11 +46,10 @@
     "placeholder": "Ask something…",
     "send": "Send",
     "quota": "{used} / {total} free questions left this month",
-    "poweredBy": "Powered by Claude",
     "errorGeneric": "Something went wrong — try again in a moment."
   },
   "footer": {
-    "edition": "Edition 01",
+    "edition": "The AI-Pilled Daily",
     "builtWith": "Built with Claude Code"
   },
   "welcome": {

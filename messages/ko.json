@@ -1,9 +1,9 @@
 {
   "_meta": "DRAFT translation by Claude — verify before launch",
   "meta": {
-    "title": "Carol — A Slower Pulse",
-    "description": "AI product notes, perspectives I keep, and what I'm building. A quarterly slower pulse in an accelerating world.",
-    "siteName": "Carol — A Slower Pulse"
+    "title": "Carol — The AI-Pilled Daily",
+    "description": "What's happening in AI today + tools I'm building. An AI PM's workspace.",
+    "siteName": "Carol — The AI-Pilled Daily"
   },
   "nav": {
     "insights": "Insights",
@@ -13,12 +13,12 @@
     "chat": "Chat"
   },
   "hero": {
-    "eyebrow": "A Slower Pulse",
-    "headline_line1": "가속되는 세계 속에서,",
-    "headline_line2": "느리게 관찰하는 기록.",
-    "byline": "Carol · AI 프로덕트 · 큐레이터",
-    "cta_read": "최신호 읽기",
-    "cta_chat": "디지털 트윈과 대화하기"
+    "eyebrow": "The AI-Pilled Daily",
+    "headline_line1": "The AI world keeps moving.",
+    "headline_line2": "I'm watching it for you.",
+    "byline": "Carol · AI product · toolmaker",
+    "cta_read": "See today's signals",
+    "cta_chat": "Talk to my digital twin"
   },
   "sections": {
     "insights": "Insights",
@@ -37,11 +37,10 @@
     "try": "질문해 보기",
     "placeholder": "질문을 입력하세요…",
     "send": "보내기",
-    "quota": "이번 달 무료 질문 {used} / {total}회 남음",
-    "poweredBy": "Powered by Claude"
+    "quota": "이번 달 무료 질문 {used} / {total}회 남음"
   },
   "footer": {
-    "edition": "Edition 01",
+    "edition": "The AI-Pilled Daily",
     "builtWith": "Built with Claude Code"
   },
   "welcome": {

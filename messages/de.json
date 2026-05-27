@@ -1,9 +1,9 @@
 {
   "_meta": "DRAFT translation by Claude — verify before launch",
   "meta": {
-    "title": "Carol — A Slower Pulse",
-    "description": "AI product notes, perspectives I keep, and what I'm building. A quarterly slower pulse in an accelerating world.",
-    "siteName": "Carol — A Slower Pulse"
+    "title": "Carol — The AI-Pilled Daily",
+    "description": "What's happening in AI today + tools I'm building. An AI PM's workspace.",
+    "siteName": "Carol — The AI-Pilled Daily"
   },
   "nav": {
     "insights": "Insights",
@@ -13,12 +13,12 @@
     "chat": "Chat"
   },
   "hero": {
-    "eyebrow": "A Slower Pulse",
-    "headline_line1": "In einer beschleunigten Welt —",
-    "headline_line2": "ein langsamerer Blick.",
-    "byline": "Carol · KI-Produkt · Kuratorin",
-    "cta_read": "Aktuelle Ausgabe lesen",
-    "cta_chat": "Mit meinem digitalen Zwilling sprechen"
+    "eyebrow": "The AI-Pilled Daily",
+    "headline_line1": "The AI world keeps moving.",
+    "headline_line2": "I'm watching it for you.",
+    "byline": "Carol · AI product · toolmaker",
+    "cta_read": "See today's signals",
+    "cta_chat": "Talk to my digital twin"
   },
   "sections": {
     "insights": "Insights",
@@ -37,11 +37,10 @@
     "try": "Versuche zu fragen",
     "placeholder": "Gib deine Frage ein…",
     "send": "Senden",
-    "quota": "{used} / {total} kostenlose Fragen diesen Monat übrig",
-    "poweredBy": "Powered by Claude"
+    "quota": "{used} / {total} kostenlose Fragen diesen Monat übrig"
   },
   "footer": {
-    "edition": "Edition 01",
+    "edition": "The AI-Pilled Daily",
     "builtWith": "Built with Claude Code"
   },
   "welcome": {

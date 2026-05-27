@@ -370,7 +370,6 @@ export default function AskPanel({ lang }: { lang: string }) {
               &nbsp;
             </span>
           )}
-          <span className="powered">{t('poweredBy')}</span>
         </div>
       </aside>
     </>

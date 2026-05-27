@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Carol —— 一份慢下来的观察",
-    "description": "AI 产品笔记、我留着的观点、我在做的事。在被加速的世界里,一份季度更新的慢节奏。",
-    "siteName": "Carol —— 一份慢下来的观察"
+    "title": "Carol —— AI-Pilled 日报",
+    "description": "AI 圈每天在发生什么 + 我自己造的 AI 工具。一个 AI 产品人的工作台。",
+    "siteName": "Carol —— AI-Pilled 日报"
   },
   "nav": {
     "insights": "Insights",
@@ -12,11 +12,11 @@
     "chat": "Chat"
   },
   "hero": {
-    "eyebrow": "A Slower Pulse",
-    "headline_line1": "在被加速的世界里,",
-    "headline_line2": "做一份慢下来的观察。",
-    "byline": "Carol · AI 产品人 · 内容策展者",
-    "cta_read": "阅读最新一期",
+    "eyebrow": "AI-Pilled 日报",
+    "headline_line1": "AI 圈每天在变,",
+    "headline_line2": "我帮你看着。",
+    "byline": "Carol · AI 产品人 · 工具造物者",
+    "cta_read": "看今天发生了什么",
     "cta_chat": "和我的数字分身聊聊"
   },
   "sections": {
@@ -46,11 +46,10 @@
     "placeholder": "问点什么…",
     "send": "发送",
     "quota": "本月剩余 {used} / {total} 次自由提问",
-    "poweredBy": "Powered by Claude",
     "errorGeneric": "出了点问题,稍后再试一次。"
   },
   "footer": {
-    "edition": "Edition 01",
+    "edition": "AI-Pilled 日报",
     "builtWith": "Built with Claude Code"
   },
   "welcome": {
