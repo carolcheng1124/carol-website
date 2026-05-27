@@ -6,7 +6,7 @@
   },
   "nav": {
     "news": "News",
-    "insights": "Insights",
+    "notes": "Notes",
     "perspectives": "Perspectives",
     "plans": "Plans",
     "about": "About",
@@ -21,8 +21,8 @@
     "cta_chat": "和我的数字分身聊聊"
   },
   "sections": {
-    "insights": "Insights",
-    "insights_kicker": "观察笔记",
+    "notes": "Notes",
+    "notes_kicker": "观察笔记",
     "perspectives": "Perspectives",
     "perspectives_kicker": "他者之声",
     "plans": "Plans",

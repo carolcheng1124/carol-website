@@ -7,7 +7,7 @@
   },
   "nav": {
     "news": "News",
-    "insights": "Insights",
+    "notes": "Notes",
     "perspectives": "Perspectives",
     "plans": "Plans",
     "about": "About",
@@ -22,8 +22,8 @@
     "cta_chat": "Talk to my digital twin"
   },
   "sections": {
-    "insights": "Insights",
-    "insights_kicker": "観察ノート",
+    "notes": "Notes",
+    "notes_kicker": "観察ノート",
     "perspectives": "Perspectives",
     "perspectives_kicker": "他者の声",
     "plans": "Plans",

@@ -7,7 +7,7 @@
   },
   "nav": {
     "news": "News",
-    "insights": "Insights",
+    "notes": "Notes",
     "perspectives": "Perspectives",
     "plans": "Plans",
     "about": "About",
@@ -22,8 +22,8 @@
     "cta_chat": "Talk to my digital twin"
   },
   "sections": {
-    "insights": "Insights",
-    "insights_kicker": "Feldnotizen",
+    "notes": "Notes",
+    "notes_kicker": "Feldnotizen",
     "perspectives": "Perspectives",
     "perspectives_kicker": "Stimmen, die bleiben",
     "plans": "Plans",

@@ -7,7 +7,7 @@
   },
   "nav": {
     "news": "News",
-    "insights": "Insights",
+    "notes": "Notes",
     "perspectives": "Perspectives",
     "plans": "Plans",
     "about": "About",
@@ -22,8 +22,8 @@
     "cta_chat": "Talk to my digital twin"
   },
   "sections": {
-    "insights": "Insights",
-    "insights_kicker": "Notes de terrain",
+    "notes": "Notes",
+    "notes_kicker": "Notes de terrain",
     "perspectives": "Perspectives",
     "perspectives_kicker": "Voix retenues",
     "plans": "Plans",

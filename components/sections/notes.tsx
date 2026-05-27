@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
-import { getInsights } from '@/lib/content';
+import { getNotes } from '@/lib/content';
 
 function formatDate(iso: string, lang: string) {
   if (!iso) return '';
@@ -12,23 +12,23 @@ function formatDate(iso: string, lang: string) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
 }
 
-export default async function Insights({ lang }: { lang: string }) {
-  const items = getInsights(lang);
+export default async function Notes({ lang }: { lang: string }) {
+  const items = getNotes(lang);
   const t = await getTranslations('sections');
 
   return (
-    <section id="insights" className="page-section">
+    <section id="notes" className="page-section">
       <div className="container">
         <div className="section-head">
-          <span className="section-num">§ 01</span>
-          <h2 className="section-title">{t('insights')}</h2>
-          <span className="section-kicker">{t('insights_kicker')}</span>
+          <span className="section-num">§ 03</span>
+          <h2 className="section-title">{t('notes')}</h2>
+          <span className="section-kicker">{t('notes_kicker')}</span>
         </div>
         <div className="insights-list">
           {items.map((item) => (
             <Link
               key={item.slug}
-              href={`/${lang}/insights/${item.slug}`}
+              href={`/${lang}/notes/${item.slug}`}
               className="insight-row"
             >
               <span className="insight-date">{formatDate(item.date, lang)}</span>

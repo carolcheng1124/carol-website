@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { getInsights } from '@/lib/content';
+import { getNotes } from '@/lib/content';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shanshanbuchi.com';
 
@@ -29,12 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   }
 
-  // Insight detail pages — only zh + en (other 6 locales reuse en content)
+  // Note detail pages — only zh + en (other 6 locales reuse en content)
   for (const lang of ['zh', 'en'] as const) {
-    for (const item of getInsights(lang)) {
+    for (const item of getNotes(lang)) {
       const lastMod = item.date ? new Date(item.date) : now;
       entries.push({
-        url: `${SITE_URL}/${lang}/insights/${item.slug}`,
+        url: `${SITE_URL}/${lang}/notes/${item.slug}`,
         lastModified: Number.isNaN(lastMod.getTime()) ? now : lastMod,
         changeFrequency: 'monthly',
         priority: 0.7,

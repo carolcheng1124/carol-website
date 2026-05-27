@@ -9,7 +9,7 @@ const CONTENT_ROOT = path.join(process.cwd(), 'content');
 
 export type Lang = 'zh' | 'en';
 
-export type InsightMeta = {
+export type NoteMeta = {
   slug: string;
   title: string;
   date: string; // ISO YYYY-MM-DD
@@ -17,7 +17,7 @@ export type InsightMeta = {
   summary?: string; // optional one-line hook shown under the title in the list
 };
 
-export type Insight = InsightMeta & {
+export type Note = NoteMeta & {
   body: string;
 };
 
@@ -82,14 +82,14 @@ function resolveLang(lang: string): Lang {
 }
 
 // ------------------------------------------------------------
-// Insights
+// Notes (formerly Insights — migrated 2026-05 for v2 IA)
 // ------------------------------------------------------------
 
-export function getInsights(lang: string): InsightMeta[] {
-  const dir = path.join(CONTENT_ROOT, resolveLang(lang), 'insights');
+export function getNotes(lang: string): NoteMeta[] {
+  const dir = path.join(CONTENT_ROOT, resolveLang(lang), 'notes');
   const files = safeReadDir(dir).filter((f) => f.endsWith('.md'));
 
-  const items: InsightMeta[] = files.map((file) => {
+  const items: NoteMeta[] = files.map((file) => {
     const slug = file.replace(/\.md$/, '');
     const { data } = readMarkdown(path.join(dir, file));
     return {
@@ -106,8 +106,8 @@ export function getInsights(lang: string): InsightMeta[] {
   return items;
 }
 
-export function getInsight(lang: string, slug: string): Insight | null {
-  const dir = path.join(CONTENT_ROOT, resolveLang(lang), 'insights');
+export function getNote(lang: string, slug: string): Note | null {
+  const dir = path.join(CONTENT_ROOT, resolveLang(lang), 'notes');
   const filePath = path.join(dir, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
   const { data, content } = readMarkdown(filePath);

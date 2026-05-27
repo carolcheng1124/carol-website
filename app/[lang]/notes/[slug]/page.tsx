@@ -3,8 +3,8 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import {
-  getInsight,
-  getInsights,
+  getNote,
+  getNotes,
   renderMarkdown,
   isPlaceholderBody,
   stripBracketMarkers,
@@ -16,7 +16,7 @@ export function generateStaticParams() {
   // Pre-generate slugs for zh + en (other 6 locales reuse en content at runtime)
   const out: Params[] = [];
   for (const lang of ['zh', 'en'] as const) {
-    for (const item of getInsights(lang)) {
+    for (const item of getNotes(lang)) {
       out.push({ lang, slug: item.slug });
     }
   }
@@ -33,7 +33,7 @@ function formatDate(iso: string, lang: string) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
 }
 
-export default async function InsightPage({
+export default async function NotePage({
   params,
 }: {
   params: Promise<Params>;
@@ -45,11 +45,11 @@ export default async function InsightPage({
   }
   setRequestLocale(lang);
 
-  const insight = getInsight(lang, slug);
-  if (!insight) notFound();
+  const note = getNote(lang, slug);
+  if (!note) notFound();
 
-  const placeholder = isPlaceholderBody(insight.body);
-  const html = placeholder ? '' : renderMarkdown(stripBracketMarkers(insight.body));
+  const placeholder = isPlaceholderBody(note.body);
+  const html = placeholder ? '' : renderMarkdown(stripBracketMarkers(note.body));
 
   // HANDOFF rule: for non-zh/en visitors essay content stays English with notice.
   const fallbackNotice =
@@ -64,17 +64,17 @@ export default async function InsightPage({
   return (
     <div className="container">
       <article className="article-page">
-        <Link href={`/${lang}#insights`} className="article-back">
+        <Link href={`/${lang}#notes`} className="article-back">
           ← {backLabel}
         </Link>
 
         <div className="article-meta">
-          <span>{formatDate(insight.date, lang)}</span>
-          <span className="tag">{insight.tag}</span>
+          <span>{formatDate(note.date, lang)}</span>
+          <span className="tag">{note.tag}</span>
           {fallbackNotice && <span>· {fallbackNotice}</span>}
         </div>
 
-        <h1 className="article-title">{insight.title}</h1>
+        <h1 className="article-title">{note.title}</h1>
 
         {placeholder ? (
           <p className="article-pending">{pendingMsg}</p>
