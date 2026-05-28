@@ -1,8 +1,14 @@
 // =============================================================
 // RSS 白名单 —— /news 唯一允许的抓取来源
+//
 // 严禁加入: X/Twitter、播客、付费墙站点(The Information / Stratechery)
-// 调整这张表前确认: 是不是官方/合规的 RSS,要不要走"人工 curate 到
-// /perspectives"而不是入这条管线。
+// 中文 AI 厂(月之暗面 / MiniMax / 智谱 / DeepSeek)普遍不开 RSS,
+// 已确认无官方 feed,统一走 /perspectives 人工 curate,不在这里抓。
+//
+// Anthropic 和 Meta AI 也没有官方 RSS。当前借用第三方仓库
+// Olshansk/rss-feeds(用 Claude 自动生成)的 raw feed。**这是依赖**:
+// 如果哪天作者停维护,需要切换方案(改为 /perspectives 人工 curate,
+// 或自建 scraper)。监控锚点:跑一次 cron 后看这两条是否仍然 inserted > 0。
 // =============================================================
 
 export type NewsSource = {
@@ -25,8 +31,9 @@ export const NEWS_SOURCES: NewsSource[] = [
     lang: 'en',
   },
   {
+    // 官方无 RSS,用 Olshansk/rss-feeds generated feed(2026-05 起依赖)
     name: 'Anthropic',
-    feed: 'https://www.anthropic.com/news/rss.xml',
+    feed: 'https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml',
     homepage: 'https://www.anthropic.com/news',
     lang: 'en',
   },
@@ -37,8 +44,9 @@ export const NEWS_SOURCES: NewsSource[] = [
     lang: 'en',
   },
   {
+    // 官方无 RSS,同样借用 Olshansk/rss-feeds
     name: 'Meta AI',
-    feed: 'https://ai.meta.com/blog/rss/',
+    feed: 'https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml',
     homepage: 'https://ai.meta.com/blog',
     lang: 'en',
   },
@@ -59,31 +67,5 @@ export const NEWS_SOURCES: NewsSource[] = [
     feed: 'https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+Claude&points=100',
     homepage: 'https://news.ycombinator.com',
     lang: 'en',
-  },
-
-  // ---- 中文实验室 ----
-  {
-    name: '月之暗面',
-    feed: 'https://www.moonshot.cn/rss.xml',
-    homepage: 'https://www.moonshot.cn',
-    lang: 'zh',
-  },
-  {
-    name: 'MiniMax',
-    feed: 'https://www.minimax.io/news/rss',
-    homepage: 'https://www.minimax.io/news',
-    lang: 'zh',
-  },
-  {
-    name: '智谱',
-    feed: 'https://www.zhipuai.cn/rss.xml',
-    homepage: 'https://www.zhipuai.cn',
-    lang: 'zh',
-  },
-  {
-    name: 'DeepSeek',
-    feed: 'https://api-docs.deepseek.com/news/rss.xml',
-    homepage: 'https://www.deepseek.com',
-    lang: 'zh',
   },
 ];

@@ -109,12 +109,17 @@ function rssItemToParsed(
   const iso = toIso(pubDate);
   if (!iso) return null;
 
+  const cleaned = sourceSpecificClean(
+    collapseWhitespace(stripHtml(description)),
+    source.name,
+  );
+
   return {
     source: source.name,
     sourceUrl: source.homepage,
     url: link.trim(),
     title: collapseWhitespace(stripHtml(title)),
-    summary: clamp(collapseWhitespace(stripHtml(description)), 320),
+    summary: clamp(cleaned, 320),
     publishedAt: iso,
     lang: source.lang,
   };
@@ -137,12 +142,17 @@ function atomEntryToParsed(
   const iso = toIso(updated);
   if (!iso) return null;
 
+  const cleaned = sourceSpecificClean(
+    collapseWhitespace(stripHtml(summary)),
+    source.name,
+  );
+
   return {
     source: source.name,
     sourceUrl: source.homepage,
     url: link.trim(),
     title: collapseWhitespace(stripHtml(title)),
-    summary: clamp(collapseWhitespace(stripHtml(summary)), 320),
+    summary: clamp(cleaned, 320),
     publishedAt: iso,
     lang: source.lang,
   };
@@ -184,6 +194,23 @@ function extractAtomLink(link: unknown): string {
     if (typeof obj['@_href'] === 'string') return obj['@_href'];
   }
   return '';
+}
+
+// 源特定的 summary 清洗 —— 处理 RSS description 里塞元数据而非真实摘要的情况
+// 必须和 lib/news-sources.ts 的 name 字段保持一致,否则不会命中
+function sourceSpecificClean(summary: string, source: string): string {
+  if (source === 'arXiv cs.AI') {
+    // 格式: "arXiv:XXXX.YYYYY Announce Type: new Abstract: <真实摘要>"
+    const i = summary.indexOf('Abstract:');
+    if (i >= 0) return summary.slice(i + 'Abstract:'.length).trim();
+    return summary; // arXiv 格式偶有变体,fallback 原样
+  }
+  if (source === 'Hacker News (AI)') {
+    // HN description 永远是 "Article URL: ... Comments URL: ... Points: ..."
+    // 这是 HN 设计,没有真实摘要可拿。置空,UI 只显示标题。
+    return '';
+  }
+  return summary;
 }
 
 function stripHtml(s: string): string {
