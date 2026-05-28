@@ -2,8 +2,14 @@
 // RSS 白名单 —— /news 唯一允许的抓取来源
 //
 // 严禁加入: X/Twitter、播客、付费墙站点(The Information / Stratechery)
-// 中文 AI 厂(月之暗面 / MiniMax / 智谱 / DeepSeek)普遍不开 RSS,
-// 已确认无官方 feed,统一走 /perspectives 人工 curate,不在这里抓。
+//
+// 中文 AI 厂(月之暗面 / MiniMax / 智谱 / DeepSeek / 通义)普遍不开博客 RSS。
+// 探测结论(2026-05-29):
+//   - 模型 repo(Qwen3 / Kimi-K2 / Kimi-VL...)在 GitHub 不发 Release,全部 0 entries
+//   - 工具 repo 里只有 MoonshotAI/kimi-cli 是周更 + 全 STABLE,信号干净 → 入白名单
+//   - QwenLM/qwen-code 8/10 是 nightly preview,会污染 /news;MoonshotAI/kimi-code 几乎日更,
+//     也会刷屏 —— 都 skip
+//   - 其余中文模型动态 + Seedance(字节闭源视频,无 repo)统一走 /perspectives 人工 curate
 //
 // Anthropic 和 Meta AI 也没有官方 RSS。当前借用第三方仓库
 // Olshansk/rss-feeds(用 Claude 自动生成)的 raw feed。**这是依赖**:
@@ -67,5 +73,14 @@ export const NEWS_SOURCES: NewsSource[] = [
     feed: 'https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+Claude&points=100',
     homepage: 'https://news.ycombinator.com',
     lang: 'en',
+  },
+
+  // ---- 中文厂(唯一干净的 GitHub Release 源) ----
+  // 注: 模型本身的 release(Kimi-K2/VL/Audio)在 GitHub 上不存在,只有 CLI 发版
+  {
+    name: 'Kimi',
+    feed: 'https://github.com/MoonshotAI/kimi-cli/releases.atom',
+    homepage: 'https://github.com/MoonshotAI/kimi-cli',
+    lang: 'zh',
   },
 ];
