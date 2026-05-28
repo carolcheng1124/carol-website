@@ -11,7 +11,7 @@ export default async function About({ lang }: { lang: string }) {
     <section id="about" className="page-section">
       <div className="container">
         <div className="section-head">
-          <span className="section-num">§ 04</span>
+          <span className="section-num">§ 05</span>
           <h2 className="section-title">{t('about')}</h2>
           <span className="section-kicker">{t('about_kicker')}</span>
         </div>

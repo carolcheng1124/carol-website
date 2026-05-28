@@ -10,7 +10,7 @@ export default async function Perspectives({ lang }: { lang: string }) {
     <section id="perspectives" className="page-section">
       <div className="container">
         <div className="section-head">
-          <span className="section-num">§ 02</span>
+          <span className="section-num">§ 03</span>
           <h2 className="section-title">{t('perspectives')}</h2>
           <span className="section-kicker">{t('perspectives_kicker')}</span>
         </div>

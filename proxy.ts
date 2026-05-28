@@ -8,7 +8,7 @@ const intlMiddleware = createMiddleware(routing);
 // so external links stay valid. The pattern matches /<locale>/insights and any sub-path.
 const INSIGHTS_REDIRECT = /^\/([a-z]{2})\/insights(\/.*)?$/;
 
-export default function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const match = req.nextUrl.pathname.match(INSIGHTS_REDIRECT);
   if (match) {
     const url = req.nextUrl.clone();
@@ -21,7 +21,4 @@ export default function middleware(req: NextRequest) {
 export const config = {
   // Match all pathnames except API, auth callback, Next internals, and static files
   matcher: ['/((?!api|auth|_next|_vercel|.*\\..*).*)'],
-  // next-intl's middleware transitively imports node:fs / node:path,
-  // which Vercel's default Edge runtime forbids. Run on Node.js instead.
-  runtime: 'nodejs',
 };

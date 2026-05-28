@@ -9,7 +9,7 @@ export default async function Plans({ lang }: { lang: string }) {
     <section id="plans" className="page-section">
       <div className="container">
         <div className="section-head">
-          <span className="section-num">§ 03</span>
+          <span className="section-num">§ 04</span>
           <h2 className="section-title">{t('plans')}</h2>
           <span className="section-kicker">{t('plans_kicker')}</span>
         </div>

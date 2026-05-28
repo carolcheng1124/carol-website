@@ -29,7 +29,7 @@ export default async function PerspectivesPage({
         </Link>
 
         <div className="section-head" style={{ marginTop: 0 }}>
-          <span className="section-num">§ 02</span>
+          <span className="section-num">§ 03</span>
           <h1 className="section-title">{t('perspectives')}</h1>
           <span className="section-kicker">{t('perspectives_kicker')}</span>
         </div>

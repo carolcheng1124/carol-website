@@ -20,7 +20,7 @@ export default async function Notes({ lang }: { lang: string }) {
     <section id="notes" className="page-section">
       <div className="container">
         <div className="section-head">
-          <span className="section-num">§ 03</span>
+          <span className="section-num">§ 02</span>
           <h2 className="section-title">{t('notes')}</h2>
           <span className="section-kicker">{t('notes_kicker')}</span>
         </div>

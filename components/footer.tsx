@@ -11,7 +11,8 @@ export default async function Footer() {
             Carol<span style={{ color: 'var(--accent)' }}>.</span>
           </div>
           <div className="footer-meta">
-            {t('edition')} · {year} · <span className="accent">{t('builtWith')}</span>
+            {t('edition')} · {year} · <span className="accent">{t('builtWith')}</span> ·{' '}
+            <a href="/feed.xml" className="footer-rss">RSS</a>
           </div>
         </div>
       </div>

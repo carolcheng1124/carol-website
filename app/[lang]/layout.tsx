@@ -41,6 +41,9 @@ export async function generateMetadata({
     alternates: {
       canonical: url,
       languages,
+      types: {
+        'application/rss+xml': `${SITE_URL}/feed.xml`,
+      },
     },
     openGraph: {
       type: 'website',
