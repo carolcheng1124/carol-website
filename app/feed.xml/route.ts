@@ -34,8 +34,9 @@ type FeedEntry = {
   lang: 'zh' | 'en';
 };
 
-function buildEntries(): FeedEntry[] {
-  const newsEntries: FeedEntry[] = getNewsItems().map((n) => ({
+async function buildEntries(): Promise<FeedEntry[]> {
+  const news = await getNewsItems();
+  const newsEntries: FeedEntry[] = news.map((n) => ({
     title: n.title,
     link: n.url,
     description: n.summary,
@@ -74,8 +75,8 @@ function renderItem(e: FeedEntry): string {
     </item>`;
 }
 
-export function GET() {
-  const entries = buildEntries();
+export async function GET() {
+  const entries = await buildEntries();
   const latest = entries[0]?.pubDate ?? new Date().toISOString();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

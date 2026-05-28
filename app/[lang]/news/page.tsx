@@ -18,6 +18,9 @@ export function generateStaticParams() {
   return routing.locales.map((lang) => ({ lang }));
 }
 
+// ISR: cron 跑 2 次/天,300s 刷新够及时又对 Supabase quota 友好
+export const revalidate = 300;
+
 export default async function NewsPage({
   params,
 }: {
@@ -30,7 +33,7 @@ export default async function NewsPage({
   setRequestLocale(lang);
 
   const t = await getTranslations('news');
-  const items = getNewsItems();
+  const items = await getNewsItems();
 
   return (
     <section className="page-section">

@@ -1,96 +1,87 @@
-// Schema for a news item — mirrors the planned Postgres `news_items` table.
-// During P1 we serve mock data so the route + visual ships before the cron
-// pipeline lands. swap to a real DB read once `news_items` exists.
+import { createClient } from '@supabase/supabase-js';
+
+// =============================================================
+// /news 数据源 —— 直读 Supabase news_items 表
+//
+// 表数据由 Vercel Cron (app/api/cron/news/route.ts) 写入。
+// news_items 启用 RLS 且无 policy,所以这里必须用 service_role key
+// (server-only, schema.sql 有约定: 前端永远不直连这张表)。
+// 调用方都是 RSC,在 Node runtime 跑,key 不会泄到浏览器。
+// =============================================================
 
 export type NewsItem = {
-  id: string;          // future: postgres serial_id; today: stable mock id
-  source: string;      // human label e.g. "OpenAI" / "Anthropic" / "arXiv"
-  sourceUrl: string;   // homepage of the publisher
-  title: string;       // original article title
-  url: string;         // canonical link to the article
-  summary: string;     // one-paragraph extract or hand-written summary
-  publishedAt: string; // ISO YYYY-MM-DD
-  lang: 'zh' | 'en';   // primary language of the source
-  aiTake?: string;     // 🤖 来自姗姗的 AI 分身 — populated by /api/twin-take in P2
+  id: string;
+  source: string;
+  sourceUrl: string;
+  title: string;
+  url: string;
+  summary: string;
+  publishedAt: string; // ISO 8601
+  lang: 'zh' | 'en';
+  aiTake?: string;
 };
 
-// Mock data for P1 visual scaffolding. Replace with `getNewsItems` reading
-// `news_items` table once Vercel Cron + RSS pipeline ships.
-const MOCK: NewsItem[] = [
-  {
-    id: 'mock-1',
-    source: 'Anthropic',
-    sourceUrl: 'https://www.anthropic.com/news',
-    title: 'Claude Opus 4.7 — extended thinking on by default',
-    url: 'https://www.anthropic.com/news/claude-opus-4-7',
-    summary:
-      'Anthropic 把 extended thinking 设为 Opus 4.7 的默认开关；Sonnet 4.6 同步小幅升级。pricing 不变,但 thinking budget 计入 output token。',
-    publishedAt: '2026-05-26',
-    lang: 'en',
-  },
-  {
-    id: 'mock-2',
-    source: 'OpenAI',
-    sourceUrl: 'https://openai.com/blog',
-    title: 'GPT-5.5 Mini API now generally available',
-    url: 'https://openai.com/blog/gpt-5-5-mini-ga',
-    summary:
-      'GPT-5.5 Mini 转 GA, 单价比 GPT-5 便宜约 60%, context 同样到 1M tokens。tool-use 延迟 p50 < 800ms。',
-    publishedAt: '2026-05-26',
-    lang: 'en',
-  },
-  {
-    id: 'mock-3',
-    source: 'Google DeepMind',
-    sourceUrl: 'https://deepmind.google/discover/blog',
-    title: 'Gemini 3 Flash hits new SOTA on long-context retrieval',
-    url: 'https://deepmind.google/discover/blog/gemini-3-flash-long-context',
-    summary:
-      'Gemini 3 Flash 在 NIAH 1M context 100% 召回, 价格比上一代便宜 35%。Workspace 集成本周开始 rollout。',
-    publishedAt: '2026-05-25',
-    lang: 'en',
-  },
-  {
-    id: 'mock-4',
-    source: '月之暗面',
-    sourceUrl: 'https://www.moonshot.cn',
-    title: 'Kimi K2.5 开放 1M context 公测,推理能力对标 Opus',
-    url: 'https://www.moonshot.cn/blog/kimi-k2-5',
-    summary:
-      'Moonshot 发布 Kimi K2.5 公测版,1M context, agent benchmark SWE-bench 56%。API 限额暂时按邀请制。',
-    publishedAt: '2026-05-25',
-    lang: 'zh',
-  },
-  {
-    id: 'mock-5',
-    source: 'arXiv cs.AI',
-    sourceUrl: 'https://arxiv.org/list/cs.AI/recent',
-    title: 'Reward Hacking is Solvable: A Bayesian Approach to RLHF Specification',
-    url: 'https://arxiv.org/abs/2605.12345',
-    summary:
-      '一篇来自 DeepMind + Berkeley 的论文,提出用 Bayesian inference 把 reward model 不确定性显式建模, 在 4 个 alignment 任务上比 standard RLHF 减少 reward hacking 67%。',
-    publishedAt: '2026-05-24',
-    lang: 'en',
-  },
-  {
-    id: 'mock-6',
-    source: 'Hugging Face',
-    sourceUrl: 'https://huggingface.co/blog',
-    title: 'Open Model Initiative: 10 labs commit to truly open weights + data',
-    url: 'https://huggingface.co/blog/open-model-initiative',
-    summary:
-      'HuggingFace 联合 10 家研究室(包括 EleutherAI, AllenAI, BigScience)成立 OMI, 承诺模型权重 + 训练数据 + 训练代码全开源。',
-    publishedAt: '2026-05-23',
-    lang: 'en',
-  },
-];
+type Row = {
+  id: string;
+  source: string;
+  source_url: string;
+  url: string;
+  title: string;
+  summary: string;
+  published_at: string;
+  lang: 'zh' | 'en';
+  ai_take: string | null;
+};
 
-export function getNewsItems(): NewsItem[] {
-  return [...MOCK].sort((a, b) =>
-    a.publishedAt < b.publishedAt ? 1 : a.publishedAt > b.publishedAt ? -1 : 0,
-  );
+function getClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    throw new Error('Supabase env missing (NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY)');
+  }
+  return createClient(url, key, {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
 }
 
-export function getNewsItem(id: string): NewsItem | null {
-  return MOCK.find((n) => n.id === id) ?? null;
+function rowToItem(r: Row): NewsItem {
+  return {
+    id: r.id,
+    source: r.source,
+    sourceUrl: r.source_url,
+    title: r.title,
+    url: r.url,
+    summary: r.summary,
+    publishedAt: r.published_at,
+    lang: r.lang,
+    aiTake: r.ai_take ?? undefined,
+  };
+}
+
+const SELECT = 'id, source, source_url, url, title, summary, published_at, lang, ai_take';
+
+export async function getNewsItems(limit = 50): Promise<NewsItem[]> {
+  const supabase = getClient();
+  const { data, error } = await supabase
+    .from('news_items')
+    .select(SELECT)
+    .order('published_at', { ascending: false })
+    .limit(limit);
+  if (error) {
+    // 不抛 —— 让 /news 页面渲染空列表,不要把整个站炸了
+    console.error('[getNewsItems]', error.message);
+    return [];
+  }
+  return (data ?? []).map((r) => rowToItem(r as Row));
+}
+
+export async function getNewsItem(id: string): Promise<NewsItem | null> {
+  const supabase = getClient();
+  const { data, error } = await supabase
+    .from('news_items')
+    .select(SELECT)
+    .eq('id', id)
+    .maybeSingle();
+  if (error || !data) return null;
+  return rowToItem(data as Row);
 }

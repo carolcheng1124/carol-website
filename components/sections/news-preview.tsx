@@ -14,7 +14,7 @@ function formatDate(iso: string, lang: string) {
 
 export default async function NewsPreview({ lang }: { lang: string }) {
   const t = await getTranslations('news');
-  const items = getNewsItems().slice(0, 10);
+  const items = await getNewsItems(10);
   const moreLabel = lang === 'zh' ? '看全部 News' : 'See all News';
 
   return (
