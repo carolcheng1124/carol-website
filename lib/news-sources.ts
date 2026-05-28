@@ -11,10 +11,14 @@
 //     也会刷屏 —— 都 skip
 //   - 其余中文模型动态 + Seedance(字节闭源视频,无 repo)统一走 /perspectives 人工 curate
 //
-// Anthropic 和 Meta AI 也没有官方 RSS。当前借用第三方仓库
-// Olshansk/rss-feeds(用 Claude 自动生成)的 raw feed。**这是依赖**:
+// Anthropic 没有官方 RSS。当前借用第三方仓库 Olshansk/rss-feeds
+// (用 Claude 自动生成)的 raw feed。**这是依赖**:
 // 如果哪天作者停维护,需要切换方案(改为 /perspectives 人工 curate,
-// 或自建 scraper)。监控锚点:跑一次 cron 后看这两条是否仍然 inserted > 0。
+// 或自建 scraper)。监控锚点:跑一次 cron 后看是否仍然 inserted > 0。
+//
+// Meta AI 也没官方 RSS,Olshansk 的 Meta AI feed 内容也已陈旧
+// (最新一篇 2026-04-08,11 周没动 —— 估计 Olshansk 的 Meta 抓取器坏了),
+// 已从白名单移除,完全走 /perspectives 人工 curate。
 // =============================================================
 
 export type NewsSource = {
@@ -47,13 +51,6 @@ export const NEWS_SOURCES: NewsSource[] = [
     name: 'Google DeepMind',
     feed: 'https://deepmind.google/blog/rss.xml',
     homepage: 'https://deepmind.google/discover/blog',
-    lang: 'en',
-  },
-  {
-    // 官方无 RSS,同样借用 Olshansk/rss-feeds
-    name: 'Meta AI',
-    feed: 'https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_meta_ai.xml',
-    homepage: 'https://ai.meta.com/blog',
     lang: 'en',
   },
   {
